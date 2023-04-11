@@ -3,18 +3,17 @@ cmake_minimum_required(VERSION 3.0.2)
 project(srender)
 
 file(COPY "resources" DESTINATION "${PROJECT_BINARY_DIR}/bin")
-file(COPY "deps/shaders" DESTINATION "${PROJECT_BINARY_DIR}/bin/resources")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
 
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/deps/cmake)
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/small3d/cmake)
 
 if(MSVC)
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PROJECT_BINARY_DIR}/bin")
   set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PROJECT_BINARY_DIR}/bin")
 endif()
 
-set(DEPS_PATH "${CMAKE_SOURCE_DIR}/deps")
+set(DEPS_PATH "${CMAKE_SOURCE_DIR}/small3d/deps")
 set(CMAKE_PREFIX_PATH ${DEPS_PATH})
 
 if(MSVC)
@@ -38,11 +37,11 @@ find_package(OGG REQUIRED)
 find_package(VORBIS REQUIRED)
 find_package(Portaudio REQUIRED)
 find_package(Freetype REQUIRED)
-find_package(SMALL3D REQUIRED)
 
 if(UNIX OR (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU" AND NOT
 	CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10))
   find_package(BZip2 REQUIRED)
 endif()
 
+subdirs(small3d)
 subdirs(src)

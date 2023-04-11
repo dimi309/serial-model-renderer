@@ -42,7 +42,7 @@ struct Object {
 
 int main(int argc, char** argv) {
   try {
-    Renderer* renderer = &Renderer::getInstance("Serial renderer", 800, 600, 0.78f, 1.0f, 24.0f, "resources/shaders/", 500);
+    Renderer* renderer = &Renderer::getInstance("Serial renderer", 800, 600, 0.78f, 1.0f, 24.0f, "../small3d/bin/resources/shaders/", 500);
     renderer->cameraPosition = glm::vec3(0.0f, 0.0f, 0.9f);
     GLFWwindow* window = renderer->getWindow();
     glfwSetKeyCallback(window, keyCallback);

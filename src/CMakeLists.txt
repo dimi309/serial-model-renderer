@@ -3,7 +3,7 @@ add_executable(srender main.cpp)
 target_include_directories(srender PUBLIC "${CMAKE_SOURCE_DIR}/include")
 
 target_include_directories(srender PUBLIC
-  ${SMALL3D_INCLUDE_DIR}
+  "${CMAKE_SOURCE_DIR}/small3d/include"
   ${GLFW_INCLUDE_DIRS}
   ${PNG_INCLUDE_DIRS}
   ${GLM_INCLUDE_DIRS}
@@ -15,7 +15,7 @@ target_include_directories(srender PUBLIC
 
 target_include_directories(srender PUBLIC ${OPENGL_INCLUDE_DIR})
 target_link_libraries(srender PUBLIC
-  ${SMALL3D_LIBRARY}
+  small3d
   ${GLEW_LIBRARIES}
   ${OPENGL_LIBRARIES}
   ${GLFW_LIBRARIES}
