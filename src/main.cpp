@@ -1,8 +1,8 @@
-#include <small3d/Renderer.hpp>
-#include <small3d/SceneObject.hpp>
+#include "Renderer.hpp"
+#include "SceneObject.hpp"
 #include <GLFW/glfw3.h>
 #include <filesystem>
-#include <small3d/GlbFile.hpp>
+#include "GlbFile.hpp"
 #include <memory>
 
 using namespace small3d;
