@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 
       for (auto& name : names) {
         Object ob;
-        ob.so = std::shared_ptr<SceneObject>(new SceneObject(name, entry.path().string(), name));
+        ob.so = std::make_shared<SceneObject>(name, Model(GlbFile(entry.path().string()), name));
         if (ob.so->getModel().defaultTextureImage != nullptr) {
           renderer->generateTexture(name, *ob.so->getModel().defaultTextureImage);
           ob.textureName = name;
