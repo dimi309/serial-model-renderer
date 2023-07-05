@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <filesystem>
 #include "GlbFile.hpp"
+#include "WavefrontFile.hpp"
 #include <memory>
 
 using namespace small3d;
@@ -60,16 +61,25 @@ int main(int argc, char** argv) {
       {
         names = GlbFile(entry.path().string()).getMeshNames();
       }
-      catch (std::runtime_error& ) {
+      catch (std::runtime_error&) {
+        names = WavefrontFile(entry.path().string()).getMeshNames();
+      }
+
+      if (names.size() == 0) {
         names.push_back("");
       }
 
       for (auto& name : names) {
         Object ob;
-        ob.so = std::make_shared<SceneObject>(name, Model(GlbFile(entry.path().string()), name));
-        if (ob.so->getModel().defaultTextureImage != nullptr) {
-          renderer->generateTexture(name, *ob.so->getModel().defaultTextureImage);
-          ob.textureName = name;
+        try {
+          ob.so = std::make_shared<SceneObject>(name, Model(GlbFile(entry.path().string()), name));
+          if (ob.so->getModel().defaultTextureImage != nullptr) {
+            renderer->generateTexture(name, *ob.so->getModel().defaultTextureImage);
+            ob.textureName = name;
+          }
+        }
+        catch (std::exception& ex) {
+          ob.so = std::make_shared<SceneObject>(name, Model(WavefrontFile(entry.path().string()), name));
         }
 
         if (ob.so->getBoundingBoxSetExtremes()[0].minX < minX) minX = ob.so->getBoundingBoxSetExtremes()[0].minX;
@@ -104,7 +114,7 @@ int main(int argc, char** argv) {
           prevSeconds = seconds;
           if (esckey)
             break;
-          
+
           for (auto& ob : objects) {
 
             ob.so->animate();
