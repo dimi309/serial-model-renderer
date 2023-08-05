@@ -89,12 +89,11 @@ int main(int argc, char** argv) {
 
       }
 
-
       float scale = 2.0f / (maxX - minX);
 
       for (auto& ob : objects) {
         ob.so->getModel().scale = glm::vec3(scale);
-        ob.so->position = glm::vec3(0.0f, 0.0f, -5.0f);
+        ob.so->position = glm::vec3(0.0f, -2.5f, -5.0f);
         ob.so->startAnimating();
       }
 
