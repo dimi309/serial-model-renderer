@@ -77,6 +77,7 @@ int main(int argc, char** argv) {
             renderer->generateTexture(name, *ob.so->getModel().defaultTextureImage);
             ob.textureName = name;
           }
+          
         }
         catch (std::exception& ex) {
           ob.so = std::make_shared<SceneObject>(name, Model(WavefrontFile(entry.path().string()), name));
@@ -84,7 +85,7 @@ int main(int argc, char** argv) {
 
         if (ob.so->getBoundingBoxSetExtremes()[0].minX < minX) minX = ob.so->getBoundingBoxSetExtremes()[0].minX;
         if (ob.so->getBoundingBoxSetExtremes()[0].maxX > maxX) maxX = ob.so->getBoundingBoxSetExtremes()[0].maxX;
-
+        
         objects.push_back(ob);
 
       }
@@ -93,7 +94,7 @@ int main(int argc, char** argv) {
 
       for (auto& ob : objects) {
         ob.so->getModel().scale = glm::vec3(scale);
-        ob.so->position = glm::vec3(0.0f, -2.5f, -5.0f);
+        ob.so->position = glm::vec3(0.0f, -2.0f, -5.0f);
         ob.so->startAnimating();
       }
 
