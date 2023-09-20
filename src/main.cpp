@@ -49,7 +49,10 @@ int main(int argc, char** argv) {
     glfwSetKeyCallback(window, keyCallback);
 
     for (const auto& entry : std::filesystem::directory_iterator("resources/models")) {
-
+      auto path = entry.path().string();
+      if (path.compare(path.length() - 4, 4, ".mtl") == 0) {
+        continue;
+      }
       std::vector<Object> objects;
       LOGINFO("Loading " + entry.path().string());
 
@@ -122,9 +125,8 @@ int main(int argc, char** argv) {
 
             ob.textureName != "" ?
               renderer->render(*ob.so, ob.textureName) :
-              renderer->render(*ob.so, glm::vec4(0.4f, 1.0f, 0.4f, 1.0f));
+              renderer->render(*ob.so, glm::vec4(ob.so->getModel().material.ambientColour, ob.so->getModel().material.alpha));
           }
-
 
           renderer->swapBuffers();
         }
