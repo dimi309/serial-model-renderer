@@ -5,6 +5,10 @@ Used for testing 3D model file parsing and rendering for robustness of the
 [small3d game development library](https://github.com/dimi309/small3d), this program will serially load and render 3D models
 and rotate them on the screen.
 
+This repository contains the small3d repository as a submodule. Use the 
+the `--recursive` flag when cloning, otherwise the small3d subdirectory 
+will remain empty on your drive.
+
 Before building, run the appropriate small3d dependencies preparation script
 from small3d/deps/scripts.
 
