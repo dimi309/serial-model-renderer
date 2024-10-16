@@ -7,7 +7,11 @@ and rotate them on the screen.
 
 This repository contains the small3d repository as a submodule. Use 
 the `--recursive` flag when cloning, otherwise the small3d subdirectory 
-will remain empty on your drive.
+will remain empty on your drive. Alternatively the submodule can be retrieved 
+after cloning using the following commands:
+	
+	git submodule init
+	git submodule update
 
 Before building, run the appropriate small3d dependencies preparation script
 from small3d/deps/scripts.
