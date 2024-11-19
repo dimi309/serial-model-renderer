@@ -44,7 +44,7 @@ struct Object {
 int main(int argc, char** argv) {
   try {
     Renderer* renderer = &Renderer::getInstance("Serial renderer", 800, 600, 0.78f, 1.0f, 24.0f, "../small3d/bin/resources/shaders/", 500);
-    renderer->cameraPosition = glm::vec3(0.0f, 0.0f, 0.9f);
+    renderer->cameraPosition = Vec3(0.0f, 0.0f, 0.9f);
     GLFWwindow* window = renderer->getWindow();
     glfwSetKeyCallback(window, keyCallback);
 
@@ -96,8 +96,8 @@ int main(int argc, char** argv) {
       float scale = 2.0f / (maxX - minX);
 
       for (auto& ob : objects) {
-        ob.so->getModel().scale = glm::vec3(scale);
-        ob.so->position = glm::vec3(0.0f, -2.0f, -5.0f);
+        ob.so->getModel().scale = Vec3(scale);
+        ob.so->position = Vec3(0.0f, -2.0f, -5.0f);
         ob.so->startAnimating();
       }
 
@@ -121,11 +121,11 @@ int main(int argc, char** argv) {
           for (auto& ob : objects) {
 
             ob.so->animate();
-            ob.so->rotate(glm::vec3(0.0f, 0.02f, 0.0f));
+            ob.so->rotate(Vec3(0.0f, 0.02f, 0.0f));
 
             ob.textureName != "" ?
               renderer->render(*ob.so, ob.textureName) :
-              renderer->render(*ob.so, glm::vec4(ob.so->getModel().material.ambientColour, ob.so->getModel().material.alpha));
+              renderer->render(*ob.so, Vec4(ob.so->getModel().material.ambientColour, ob.so->getModel().material.alpha));
           }
 
           renderer->swapBuffers();
